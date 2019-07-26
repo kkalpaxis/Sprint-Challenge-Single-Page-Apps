@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { NavLink } from "react-router-dom";
 
 const LocationList = props => {
   const [locations, setLocations] = useState([])
@@ -30,6 +31,7 @@ const LocationList = props => {
 function LocationDetails ({ location }) {
   const { name, type, dimension } = location;
   return (
+    <NavLink to={`/locations/${id}`}>
     <div className="location-card">
       <h2>{name}</h2>
       <div className="location-type">
@@ -39,6 +41,7 @@ function LocationDetails ({ location }) {
         Dimension: <h5>{dimension}</h5>
       </div>
     </div>
+    </NavLink>
   );
 }
 

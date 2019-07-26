@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { NavLink } from "react-router-dom";
 
 const CharacterList = props => {
   const [characters, setCharacters] = useState([])
@@ -30,6 +31,7 @@ const CharacterList = props => {
 function CharacterDetails ({ character }) {
   const { name, status, species } = character;
   return (
+    <NavLink to={`/character/${id}`}>
     <div className="character-card">
       <h2>{name}</h2>
       <div className="character-status">
@@ -39,6 +41,7 @@ function CharacterDetails ({ character }) {
         Species: <h5>{species}</h5>
       </div>
     </div>
+    </NavLink>
   );
 }
 

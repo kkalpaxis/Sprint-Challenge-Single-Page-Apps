@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { NavLink } from "react-router-dom";
 
 const EpisodeList = props => {
   const [episodes, setEpisodes] = useState([])
@@ -30,6 +31,7 @@ const EpisodeList = props => {
 function EpisodeDetails ({ episode }) {
   const { name, air_date, episode } = character;
   return (
+    <NavLink to={`/episodes/${id}`}>
     <div className="episode-card">
       <h2>{name}</h2>
       <div className="episode-airDate">
@@ -39,6 +41,7 @@ function EpisodeDetails ({ episode }) {
         Episode: <h5>{episode}</h5>
       </div>
     </div>
+    </NavLink>
   );
 }
 
