@@ -1,16 +1,48 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { NavLink } from "react-router-dom";
 
-export default function CharacterList() {
-  // TODO: Add useState to track data from useEffect
-
+const CharacterList = props => {
+  const [characters, setCharacters] = useState([])
   useEffect(() => {
-    // TODO: Add AJAX/API Request here - must run in `useEffect`
-    //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
-  }, [])
+    const getCharacters = () => {
+      axios
+      .get(`https://rickandmortyapi.com/api/character/`)
+      .then(response => {
+        setCharacters(response.data)
+      })
+      .catch(error => {
+        console.error('Server Error', error);
+      });
+    }
 
-  return <section className='character-list grid-view'>
+    getCharacters()
+  }, []);
 
-      <h2>TODO: `array.map()` over your state here!</h2>
-    </section>
+  return (
+    <div className='character-list grid-view'>
+      {characters.map(character => (
+        <CharacterDetails key={character.id} character={character} />
+      ))}
+    </div>
+  );
+};
 
+function CharacterDetails ({ character }) {
+  const { name, status, species } = character;
+  return (
+    <NavLink to={`/character/${id}`}>
+    <div className="character-card">
+      <h2>{name}</h2>
+      <div className="character-status">
+        Status: <h5>{status}</h5>
+      </div>
+      <div className="character-species">
+        Species: <h5>{species}</h5>
+      </div>
+    </div>
+    </NavLink>
+  );
 }
+
+export default CharacterList;
